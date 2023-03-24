@@ -17,7 +17,6 @@ The objective of the game is to win the most tricks. A trick consists of one car
 - A player may take the table at any time during their turn by saying "take".
 - A player may not take the table if there are no cards on the table.
 - The game continues until all cards have been played.
-- The player with the most tricks at the end of the game wins.
+
 # Scoring
-- Each trick won is worth one point.
-- The player with the most points at the end of the game wins.
+- The player with no cards on hand at the end of the game wins.
