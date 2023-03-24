@@ -52,40 +52,45 @@ def header(player_hand):
     print(f"Table: {table}")
 
 def play_turn(player_hand, opponent_hand, opponent_num):
-    ''' plays a turn '''
-    header (player_hand)
-    card = pick_card (player_hand, False)
+    # Print player's hand and ask for card to play
+    header(player_hand)
+    played_card = pick_card(player_hand, False)
+
     # Play a card
-    played_card =  card
     table.append(played_card)
-    print ("Try to beat the table, player {}".format (opponent_num))
-    header (opponent_hand)
-    card = pick_card (opponent_hand)
-    can_beat = False
+
+    # Print opponent's hand and ask for card to play
+    print("Try to beat the table, player {}".format(opponent_num))
+    header(opponent_hand)
+    card = pick_card(opponent_hand)
+
     # The opponent gave up
-    if card == None:
-        opponent_hand.extend (table)
-        table.clear ()
-        draw_card (player_hand)
+    if card is None:
+        opponent_hand.extend(table)
+        table.clear()
+        draw_card(player_hand)
         print("The other player cannot beat your card.")
         return True
+
     # Determine if the other player can beat the played card
-    elif card[1] == trump_suit and played_card[1] != trump_suit:
+    can_beat = False
+    if card[1] == trump_suit and played_card[1] != trump_suit:
         can_beat = True
     elif card[1] == played_card[1] and values.index(card[0]) > values.index(played_card[0]):
         can_beat = True
+
+    # Update the table and hands based on whether the opponent can beat the played card
     if can_beat:
         print("The other player beats your card.")
         table.clear()
-        # Draw a card if necessary
         draw_card(player_hand)
         draw_card(opponent_hand)
         return False
     else:
-        opponent_hand.extend (table)
-        opponent_hand.append (card)
-        table.clear ()
-        draw_card (player_hand)
+        opponent_hand.extend(table)
+        opponent_hand.append(card)
+        table.clear()
+        draw_card(player_hand)
         print("The other player cannot beat your card.")
         return True
 
@@ -93,7 +98,7 @@ def play_turn(player_hand, opponent_hand, opponent_num):
 draw_card(player1_hand)
 draw_card(player2_hand)
 player_turn = 1
-while len(player1_hand) > 0 and len(player2_hand) > 0 and len(deck) > 0:
+while len(player1_hand) > 0 and len(player2_hand) > 0:
     print ("Player {} turn".format (player_turn))
     print ("The trump suit is {} and trump card is {}".format (trump_suit, trump))
     if player_turn == 1:
